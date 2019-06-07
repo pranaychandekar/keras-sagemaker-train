@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+from __future__ import print_function
+import os
+import sys
+import traceback
+
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
+import numpy as np
+
+container_prefix = '/opt/ml/'
+
+input_path = container_prefix + 'input/data'
+output_path = os.path.join(container_prefix, 'output')
+model_path = os.path.join(container_prefix, 'model')
+
+# This algorithm has a single channel of input data called 'training'. Since we run in
+# File mode, the input files are copied to the directory specified here.
+channel_name = 'training'
+training_path = os.path.join(input_path, channel_name)
+
+batch_size = 128
+num_classes = 10
+epochs = 12
+
+
+def read_file():
+    labels = list()
+    features = list()
+    train_features = list()
+    train_labels = list()
+    test_features = list()
+    test_labels = list()
+    try:
+        training_data = open(os.path.join(training_path, 'data_set')).readlines()
+        for data_point in training_data:
+            temp = data_point.split(',')
+            label = temp[0]
+            feature = temp[1:]
+            labels.append(label)
+            features.append(feature)
+        features = np.asarray(features)
+        features = features.astype('float32')
+        features /= 255
+        print('Number of data samples: ', features.shape[0])
+        labels = np.asarray(labels)
+        labels = labels.astype(dtype=np.float32)
+        labels = labels.astype(dtype=np.int)
+        labels = keras.utils.to_categorical(labels, num_classes)
+        print('Number of data labels: ', labels.shape[0])
+        train_features = features[0:8000]
+        test_features = features[8000:]
+        train_labels = labels[0:8000]
+        test_labels = labels[8000:]
+        print("Number of training samples: ", (train_features.shape, train_labels.shape))
+        print("Number of test samples: ", (test_features.shape, test_labels.shape))
+    except Exception as e:
+        # Write out an error file. This will be returned as the failureReason in the
+        # DescribeTrainingJob result.
+        trc = traceback.format_exc()
+        print('Exception in reading data: ' + str(e) + '\n' + trc)
+    print("Finished reading the data.")
+    return train_features, train_labels, test_features, test_labels
+
+
+def train_model(x_train, y_train, x_test, y_test):
+    print("Starting the model training")
+    try:
+        model = Sequential()
+        model.add(Dense(256, input_shape=(784,), activation="tanh",
+                        kernel_initializer=keras.initializers.glorot_normal(seed=2)))
+        model.add(Dropout(0.3))
+        model.add(Dense(64, activation="selu", kernel_initializer=keras.initializers.glorot_normal(seed=2)))
+        model.add(Dropout(0.2))
+        model.add(Dense(16, activation="selu", kernel_initializer=keras.initializers.glorot_normal(seed=2)))
+        model.add(Dense(num_classes, activation='softmax'))
+
+        model.compile(loss=keras.losses.categorical_crossentropy,
+                      optimizer=keras.optimizers.Adadelta(),
+                      metrics=['accuracy'])
+
+        model.summary()
+
+        model.fit(x=x_train,
+                  y=y_train,
+                  batch_size=batch_size,
+                  epochs=epochs,
+                  verbose=1,
+                  validation_data=(x_test, y_test))
+
+        score = model.evaluate(x_test, y_test, verbose=0)
+        print('Test loss:', score[0])
+        print('Test accuracy:', score[1])
+
+        with open(os.path.join(output_path, 'model_architecture.json'), 'w') as f:
+            f.write(model.to_json())
+
+        model.save(os.path.join(model_path, 'model.h5'))
+    except Exception as e:
+        # Write out an error file.
+        trc = traceback.format_exc()
+        # with open(os.path.join(output_path, 'failure'), 'w') as s:
+        #     s.write('Exception during training: ' + str(e) + '\n' + trc)
+        # Printing this causes the exception to be in the training job logs, as well.
+        print('Exception during training: ' + str(e) + '\n' + trc)
+        # A non-zero exit code causes the training job to be marked as Failed.
+        sys.exit(255)
+    print("Finished training the model.")
+
+
+if __name__ == '__main__':
+    print("Script Status - Starting")
+    x_train, y_train, x_test, y_test = read_file()
+    train_model(x_train=x_train,
+                y_train=y_train,
+                x_test=x_test,
+                y_test=y_test)
+    print("Script Status - Finished")
+    # A zero exit code causes the job to be marked a succeeded.
+    sys.exit(0)
