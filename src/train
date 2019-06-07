@@ -22,7 +22,7 @@ training_path = os.path.join(input_path, channel_name)
 
 batch_size = 128
 num_classes = 10
-epochs = 12
+epochs = 20
 
 
 def read_file():
@@ -68,16 +68,14 @@ def train_model(x_train, y_train, x_test, y_test):
     print("Starting the model training")
     try:
         model = Sequential()
-        model.add(Dense(256, input_shape=(784,), activation="tanh",
-                        kernel_initializer=keras.initializers.glorot_normal(seed=2)))
-        model.add(Dropout(0.3))
-        model.add(Dense(64, activation="selu", kernel_initializer=keras.initializers.glorot_normal(seed=2)))
+        model.add(Dense(512, activation='relu', input_shape=(784,)))
         model.add(Dropout(0.2))
-        model.add(Dense(16, activation="selu", kernel_initializer=keras.initializers.glorot_normal(seed=2)))
+        model.add(Dense(512, activation='relu'))
+        model.add(Dropout(0.2))
         model.add(Dense(num_classes, activation='softmax'))
 
         model.compile(loss=keras.losses.categorical_crossentropy,
-                      optimizer=keras.optimizers.Adadelta(),
+                      optimizer=keras.optimizers.RMSprop(),
                       metrics=['accuracy'])
 
         model.summary()
