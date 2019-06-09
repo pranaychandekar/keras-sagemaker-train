@@ -1,0 +1,17 @@
+# Import any publicly available os with python 3.6
+# We can import any os image as per our preference.
+FROM phenompeople/centos-python:3.6.3
+
+# Setup the environment path
+ENV PATH="/opt/program:${PATH}"
+
+# Install all the packages required by the project
+# This step will download all the packages mentioned in requirements.txt and thus can take some time.
+# To avoid downloading every time you can host your own os image with the required packages on docker hub.
+# The os image which is downloaded as a part of build is cached in the system.
+ADD requirements.txt /
+RUN pip3 install -r requirements.txt
+
+# Set up the program in the image
+COPY src /opt/program
+WORKDIR /opt/program
