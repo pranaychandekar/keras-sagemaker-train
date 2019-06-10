@@ -4,10 +4,13 @@ import os
 import sys
 import traceback
 
+from tensorflow.python.client import device_lib
+
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 import numpy as np
+import time
 
 container_prefix = '/opt/ml/'
 
@@ -108,12 +111,16 @@ def train_model(x_train, y_train, x_test, y_test):
 
 
 if __name__ == '__main__':
+    start = time.time()
+    print(device_lib.list_local_devices())
     print("Script Status - Starting")
     x_train, y_train, x_test, y_test = read_file()
     train_model(x_train=x_train,
                 y_train=y_train,
                 x_test=x_test,
                 y_test=y_test)
+    end = time.time()
     print("Script Status - Finished")
+    print("Total time taken to train the model: ", end - start)
     # A zero exit code causes the job to be marked a succeeded.
     sys.exit(0)

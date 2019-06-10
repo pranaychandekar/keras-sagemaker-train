@@ -1,6 +1,7 @@
 # Import any publicly available os with python 3.6
 # We can import any os image as per our preference.
-FROM phenompeople/centos-python:3.6.3
+# FROM nvidia/cuda:9.2-cudnn7-devel-ubuntu16.04
+FROM tensorflow/tensorflow:latest-gpu-py3
 
 # Setup the environment path
 ENV PATH="/opt/program:${PATH}"
@@ -9,8 +10,8 @@ ENV PATH="/opt/program:${PATH}"
 # This step will download all the packages mentioned in requirements.txt and thus can take some time.
 # To avoid downloading every time you can host your own os image with the required packages on docker hub.
 # The os image which is downloaded as a part of build is cached in the system.
-ADD requirements-cpu.txt /
-RUN pip3 install -r requirements-cpu.txt
+ADD requirements-gpu.txt /
+RUN pip3 install -r requirements-gpu.txt
 
 # Set up the program in the image
 COPY src /opt/program
