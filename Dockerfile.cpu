@@ -9,7 +9,7 @@ ENV PATH="/opt/program:${PATH}"
 # This step will download all the packages mentioned in requirements.txt and thus can take some time.
 # To avoid downloading every time you can host your own os image with the required packages on docker hub.
 # The os image which is downloaded as a part of build is cached in the system.
-ADD requirements.txt /
+ADD requirements-cpu.txt /
 RUN pip3 install -r requirements-cpu.txt
 
 # Set up the program in the image
