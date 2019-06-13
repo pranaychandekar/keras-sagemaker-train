@@ -1,4 +1,4 @@
-.FROM tensorflow/tensorflow:latest-gpu-py3
+FROM tensorflow/tensorflow:latest-gpu-py3
 
 # Setup the environment path
 ENV PATH="/opt/program:${PATH}"
