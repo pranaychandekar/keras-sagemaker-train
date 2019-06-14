@@ -50,8 +50,9 @@ Now run the following command in this terminal to clone the project.
 cd ~/SageMaker/
 git clone https://github.com/pranayc6/keras-sagemaker-train.git
 ```
- Let's take a look at the project structure:
- ![Project Structure](/images/kst-08.png)
+Let's take a look at the project structure:
+
+![Project Structure](/images/kst-08.png?stype=centerme)
 
  Now let's compare the project structure inside 'test_directory' to the directory structure inside training job instance:
  ![Training job directory structure](/images/kst-09.png)
@@ -173,7 +174,7 @@ The wait is finally over. Let's run the training job on a GPU instance.
 ***Congratulations for a successful GPU training job run!*** 
 
  ---
-**References:**
+**Refernces:**
 
  1. [https://github.com/aws-samples/amazon-sagemaker-keras-text-classification](https://github.com/aws-samples/amazon-sagemaker-keras-text-classification)
  2. [https://github.com/awslabs/amazon-sagemaker-examples/blob/master/advanced_functionality/tensorflow_bring_your_own/tensorflow_bring_your_own.ipynb](https://github.com/awslabs/amazon-sagemaker-examples/blob/master/advanced_functionality/tensorflow_bring_your_own/tensorflow_bring_your_own.ipynb)
