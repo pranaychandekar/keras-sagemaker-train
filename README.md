@@ -166,8 +166,9 @@ Let us begin.
 
 3. Please now follow the instructions in the jupyter-notebook for the remaining portion of this part and then get back here for the next part. See you soon.
 <p align="center">
-  <img src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif" alt="Waiting image">
+  <img src="/images/kst-15.png" alt="Waiting image">
 </p>
+
 
 ---
 ### Part 6: Working with a GPU
