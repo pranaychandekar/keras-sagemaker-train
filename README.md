@@ -211,7 +211,7 @@ The wait is finally over. Let's run the training job on a GPU instance.
   <img src="/images/kst-17.png" alt="Jupyter-notebook GPU">
 </p>
 
- 3. In Step 7, change the train instance type to use a GPU. Though you can use any GPU instance, please refer to pricing before using it. They are costly. The complete list of the training instance pricing is available [here](https://aws.amazon.com/sagemaker/pricing/instance-types/).
+ 3. In Step 7, change the train instance type to use a GPU. Though you can use any GPU instance, please refer to pricing before using it. They are costly. The complete list of the training instance pricing is available [here](https://aws.amazon.com/sagemaker/pricing/).
 <p align="center">
   <img src="/images/kst-18.png" alt="Training job instance type">
 </p>
