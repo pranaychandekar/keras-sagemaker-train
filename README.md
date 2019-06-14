@@ -194,7 +194,8 @@ docker build -t keras-sagemaker-train:gpu -f Dockerfile.gpu .
 ```
 4. Run the training locally.
 ```
-./train_local.sh keras-sagemaker-train:cpu
+cd ~/SageMaker/keras-sagemaker-train/local_test/
+./train_local_gpu.sh keras-sagemaker-train:gpu
 ```
 ***You can now see the algorithm in action on a GPU***:
 <p align="center">
@@ -205,12 +206,12 @@ The wait is finally over. Let's run the training job on a GPU instance.
 
  1. Open the '***keras-sagemaker-train.ipynb***'.
 
- 2. In step 4, comment the line with docker build using ***Dockerfile.cpu*** and uncomment the one with the ***Dockerfile.gpu***.
+ 2. In Step 2, comment the line with docker build using ***Dockerfile.cpu*** and uncomment the one with the ***Dockerfile.gpu***.
 <p align="center">
   <img src="/images/kst-17.png" alt="Jupyter-notebook GPU">
 </p>
 
- 3. In step 5, change the instance type to use a GPU. Though you can use any GPU instance, please refer to pricing before using it. They are costly. The complete list of the training instance pricing is available [here](https://aws.amazon.com/sagemaker/pricing/instance-types/).
+ 3. In Step 7, change the train instance type to use a GPU. Though you can use any GPU instance, please refer to pricing before using it. They are costly. The complete list of the training instance pricing is available [here](https://aws.amazon.com/sagemaker/pricing/instance-types/).
 <p align="center">
   <img src="/images/kst-18.png" alt="Training job instance type">
 </p>
