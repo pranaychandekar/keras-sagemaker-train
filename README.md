@@ -55,7 +55,7 @@ Let's take a look at the project structure:
 ![Project Structure](/images/kst-08.png?stype=centerme)
 
  Now let's compare the project structure inside 'test_directory' to the directory structure inside training job instance:
- ![Training job directory structure](/images/kst-09.png)
+ ![Training job directory structure](/images/kst-09.png/?stype=centerme)
 
 Yes! I have replicated the directory structure of the training job instance inside the 'test_directory'. This will make it easy to setup paths inside our training code and then test the docker image locally on the Notebook instance.
 
@@ -132,6 +132,7 @@ Let us begin.
 2. Switch the notebook kernel from ‘***Kernel -> Change kernel***’ menu.
 ![SageMaker notebook change kernel](/images/kst-14.png)
 3. Please now follow the instructions in the jupyter-notebook for the remaining portion of this part and then get back here for the next part. See you soon.
+
 ![Waiting image](/images/kst-15.png)
 
 ***Congratulations! We had a successful training job run in Amazon SageMaker.***
