@@ -4,6 +4,7 @@
 ## Tutorial
 
 In this tutorial, we will work on building and training our custom keras model in Amazon SageMaker. From Part 1 to Part 5, we will implement the project on a CPU. Once we are confident, then in Part 6 we will see how we can now tweak to use a GPU. In this repository, I have defined a convention for project structure, filenames etc. to ensure reusability. You can clone this repository and perform minimal editing to get going with your own training logic. **Feel free to fork it or raise a pull request to make it more generic.** 
+
 Lets dive into our tutorial.
 
 ---
@@ -25,24 +26,28 @@ In this part, we will create one SageMaker Notebook instance which we will be us
 <p align="center">
   <img src="/images/kst-01.png" alt="Amazon SageMaker console Notebook instance">
 </p>
+
  2. For the instance type, select '***ml.t2.medium***'. Since we won’t be performing heavy operations, I chose a small instance. You can choose any instance as per your requirements. The details of different SageMaker instances are available [here](https://aws.amazon.com/sagemaker/pricing/instance-types/).
 <p align="center">
   <img src="/images/kst-02.png" alt="Notebook instance type">
 </p>
+
  3. Create a new IAM role by selecting '***Create a new role***' and select the options shown in the below image for the role configuration. Click ‘***Create role***’ to create a new role and then hit ‘***Create notebook instance***’ to submit the request for a new notebook instance.
 <p align="center">
   <img src="/images/kst-03.png" alt="Amazon SageMaker new IAM Role">
 </p>
  
-It takes a few minutes for the Notebook instance to become available. The status will change from ‘Pending’ to ‘InService’ once the instance becomes available. In the meantime, let's change the policies of our IAM role. Our IAM role associated with the Notebook instance needs a read and write access to Amazon Elastic Conatiner Repository or ECR. We need this in order to push our algorithm docker images from our Notebook instance and for Amazon SageMaker training job instance can pull this image for training.
+It takes a few minutes for the Notebook instance to become available. The status will change from ‘***Pending***’ to ‘***InService’*** once the instance becomes available. In the meantime, let's change the policies of our IAM role. Our IAM role associated with the Notebook instance needs a read and write access to Amazon Elastic Conatiner Repository or ECR. We need this in order to push our algorithm docker images from our Notebook instance and for Amazon SageMaker training job instance can pull this image for training.
  1. Click on the name of the Notebook instance we just created. This will open a page with details about the Notebook instance.
 <p align="center">
   <img src="/images/kst-04.png" alt="Notebook instance details page">
 </p>
+
  2. From the details page, click on the IAM role associated with this instance. This will open a page with IAM role details.
 <p align="center">
   <img src="/images/kst-05.png" alt="IAM Role details page">
 </p>
+
  3.  Click on ‘***Attach policies***’ and then search for ‘***AmazonEC2ContainerRegistryFullAccess***’ policy, select it and then click on ‘***Attach policy***’. Please make sure to check the checkbox next to the policy before hitting `Attach policy`.
 <p align="center">
   <img src="/images/kst-06.png" alt="Attach ECR policy IAM Role">
@@ -55,7 +60,7 @@ It takes a few minutes for the Notebook instance to become available. The status
 ### Part 3: Setting up the project
 As a part of this tutorial, we will be using this very same repository. So let us clone this project on our Notebook instance. 
 
-From the Amazon SageMaker console, click ‘Open’ to navigate into the Jupyter notebook. Under ‘New’, select ‘Terminal’. This will open up a terminal session to your notebook instance.
+From the Amazon SageMaker console, click ‘***Open Jupyter***’ to navigate into the Jupyter notebook. Under ‘***New***’, select ‘***Terminal***’. This will open up a terminal session to your notebook instance.
 <p align="center">
   <img src="/images/kst-07.png" alt="SageMaker Notebook Terminal">
 </p>
@@ -70,19 +75,18 @@ Let's take a look at the project structure:
   <img src="/images/kst-08.png" alt="Project Structure">
 </p>
 
-
- Now let's compare the project structure inside 'test_directory' to the directory structure inside training job instance:
+ Now let's compare the project structure inside '***test_dir***' to the directory structure inside training job instance:
 <p align="center">
   <img src="/images/kst-09.png" alt="Training job directory structure">
 </p>
 
-Yes! I have replicated the directory structure of the training job instance inside the 'test_directory'. This will make it easy to setup paths inside our training code and then test the docker image locally on the Notebook instance.
+Yes! I have replicated the directory structure of the training job instance inside the '***test_dir***'. This will make it easy to setup paths inside our training code and then test the docker image locally on the Notebook instance.
 
 ***~~Add more details about individual directories and files.~~***  
 
 ---
 ### Part 4: Local testing on Notebook instance
-In this part, we will set up our 'test_dir' by adding the data, upload this data to S3 for our training job reference, build docker image of our algorithm and test it on our Notebook instance.  
+In this part, we will set up our '***test_dir***' by adding the data, upload this data to S3 for our training job reference, build docker image of our algorithm and test it on our Notebook instance.  
 
 Let's begin with the data part:
 
@@ -156,10 +160,12 @@ Let us begin.
 <p align="center">
   <img src="/images/kst-13.png" alt="Jupyter-notebook">
 </p>
-2. Switch the notebook kernel from ‘***Kernel -> Change kernel***’ menu.
+
+2. Switch the notebook kernel from ‘***Kernel -> Change kernel***’ menu. Select '***conda_tensorflow_p36***'
 <p align="center">
   <img src="/images/kst-14.png" alt="SageMaker notebook change kernel">
 </p>
+
 3. Please now follow the instructions in the jupyter-notebook for the remaining portion of this part and then get back here for the next part. See you soon.
 <p align="center">
   <img src="/images/kst-15.png" alt="Waiting image">
@@ -197,11 +203,13 @@ docker build -t keras-sagemaker-train:gpu -f Dockerfile.gpu .
 
 The wait is finally over. Let's run the training job on a GPU instance.
 
- 1. Open the 'keras-sagemaker-train.ipynb'.
+ 1. Open the '***keras-sagemaker-train.ipynb***'.
+
  2. In step 4, comment the line with docker build using ***Dockerfile.cpu*** and uncomment the one with the ***Dockerfile.gpu***.
 <p align="center">
   <img src="/images/kst-17.png" alt="Jupyter-notebook GPU">
 </p>
+
  3. In step 5, change the instance type to use a GPU. Though you can use any GPU instance, please refer to pricing before using it. They are costly. The complete list of the training instance pricing is available [here](https://aws.amazon.com/sagemaker/pricing/instance-types/).
 <p align="center">
   <img src="/images/kst-18.png" alt="Training job instance type">
