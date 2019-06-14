@@ -169,6 +169,7 @@ Let us begin.
   <img src="/images/kst-15.png" alt="Waiting image">
 </p>
 
+If you have finished with the notebook then you can find the trained model sitting in the output folder of your S3 bucket.
 
 ---
 ### Part 6: Working with a GPU
