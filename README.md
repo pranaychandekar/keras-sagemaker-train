@@ -3,7 +3,7 @@
 
 ## Tutorial
 
-In this tutorial, we will work on building and training our custom keras model in Amazon SageMaker. From Part 1 to Part 5, we will implement the project on a CPU. Once we are confident, then in Part 6 we will see how we can now tweak to use a GPU. In this repository, I have defined a convention for project structure, filenames etc. to ensure reusability. You can clone this repository and perform minimal editing to get going with your own training logic. **Feel free to fork it or raise a pull request to make it more generic.** 
+In this tutorial, we will work on building and training our custom keras model in Amazon SageMaker. The tutorial is divided into 6 parts. From Part 1 to Part 5, we will implement the project on a CPU. Once we are confident, then in Part 6 we will see how we can now tweak this project to use a GPU. In this repository, I have defined a convention for project structure, filenames etc. to ensure reusability. You can clone this repository and perform minimal editing to get going with your own training logic. **Feel free to fork it or raise a pull request to make it more generic.** 
 
 Lets dive into our tutorial.
 
@@ -82,8 +82,6 @@ Let's take a look at the project structure:
 
 Yes! I have replicated the directory structure of the training job instance inside the '***test_dir***'. This will make it easy to setup paths inside our training code and then test the docker image locally on the Notebook instance.
 
-***~~Add more details about individual directories and files.~~***  
-
 ---
 ### Part 4: Local testing on Notebook instance
 In this part, we will set up our '***test_dir***' by adding the data, upload this data to S3 for our training job reference, build docker image of our algorithm and test it on our Notebook instance.  
@@ -156,7 +154,7 @@ We now have a saved model '***model.h5***' in the '***model***' directory.
 In this part, we will upload our algorithm image to Amazon ECR, define our training job and run it on a training instance. We will do all this in a jupyter-notebook.
 
 Let us begin.
- 1. Open ‘keras-sagemaker-train.ipynb’ from the home directory of this project.
+ 1. Open ‘***keras-sagemaker-train.ipynb***’ from the home directory of this project.
 <p align="center">
   <img src="/images/kst-13.png" alt="Jupyter-notebook">
 </p>
@@ -175,7 +173,7 @@ Let us begin.
 
 ---
 ### Part 6: Working with a GPU
-The first 5 parts are actually build up for this part. We are now ready to run a training job on a GPU. In this part, we will make some minor changes to our existing project to do so. Since our algorithm is written using Keras we need not make any code changes to use a GPU. Keras will automatically detect the availability of the GPU and will use it. It is recommended to use a GPU Notebook instance for this part. You can follow the steps in Part 2 to and select a GPU Notebook instance. I used ‘ml.p2.xlarge’ for this part. If you are not using a GPU instance you will not be able to perform a GPU test run on your Notebook instance.
+The first 5 parts are actually build up for this part. We are now ready to run a training job on a GPU. In this part, we will make some minor changes to our existing project to do so. Since our algorithm is written using Keras we need not make any code changes to use a GPU. Keras will automatically detect the availability of the GPU and will use it. Though it is not necessary, I would recommend to use a GPU Notebook instance for this part. You can follow the steps in Part 2 to and select a GPU Notebook instance. I used ‘***ml.p2.xlarge***’ for this part. If you are not using a GPU instance you will not be able to perform a GPU test run on your Notebook instance.
  
 ***Perform the following exercise only if you are using a GPU Notebook instance else switch to the next exercise.***
 
@@ -184,7 +182,7 @@ The first 5 parts are actually build up for this part. We are now ready to run a
  ```
 cd ~/SageMaker/
 ```
-2. Change the access permissions of the train file:
+2. Change the access permissions of the train file.
 ```
 chmod +x src/*
 ```
@@ -218,6 +216,10 @@ The wait is finally over. Let's run the training job on a GPU instance.
  5. Run all the cells in the notebook.
 
 ***Congratulations for a successful GPU training job run!*** 
+<p align="center">
+  <img src="https://media.giphy.com/media/l0MYDGA3Du1hBR4xG/giphy.gif" alt="Training job instance type">
+</p>
+
 
  ---
 **Refernces:**
