@@ -51,8 +51,10 @@ cd ~/SageMaker/
 git clone https://github.com/pranayc6/keras-sagemaker-train.git
 ```
 Let's take a look at the project structure:
+<p align="center">
+  <img src="/images/kst-08.png" alt="Project Structure">
+</p>
 
-![Project Structure](/images/kst-08.png?stype=centerme)
 
  Now let's compare the project structure inside 'test_directory' to the directory structure inside training job instance:
  ![Training job directory structure](/images/kst-09.png/?stype=centerme)
