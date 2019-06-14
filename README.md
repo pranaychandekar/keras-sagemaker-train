@@ -173,7 +173,7 @@ The wait is finally over. Let's run the training job on a GPU instance.
 ***Congratulations for a successful GPU training job run!*** 
 
  ---
-**Refernces:**
+**References:**
 
  1. [https://github.com/aws-samples/amazon-sagemaker-keras-text-classification](https://github.com/aws-samples/amazon-sagemaker-keras-text-classification)
  2. [https://github.com/awslabs/amazon-sagemaker-examples/blob/master/advanced_functionality/tensorflow_bring_your_own/tensorflow_bring_your_own.ipynb](https://github.com/awslabs/amazon-sagemaker-examples/blob/master/advanced_functionality/tensorflow_bring_your_own/tensorflow_bring_your_own.ipynb)
