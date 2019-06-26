@@ -3,7 +3,7 @@
 
 ## Tutorial
 
-In this tutorial, we will work on building and training our custom Keras model in Amazon SageMaker. The tutorial is divided into 6 parts. From Part 1 to Part 5, we will implement the project on a CPU. Once we are confident, then in Part 6 we will see how we can now tweak this project to use a GPU. In this repository, I have defined a convention for project structure, filenames etc. to ensure reusability. You can clone this repository and perform minimal editing to get going with your own training logic. **Feel free to fork it or raise a pull request to make it more generic.** 
+Hi! I am Pranay Chandekar and in this tutorial, we will work on building and training our custom Keras model in Amazon SageMaker. The tutorial is divided into 6 parts. From Part 1 to Part 5, we will implement the project on a CPU. Once we are confident, then in Part 6 we will see how we can now tweak this project to use a GPU. In this repository, I have defined a convention for project structure, filenames etc. to ensure reusability. You can clone this repository and perform minimal editing to get going with your own training logic. **Feel free to fork it or raise a pull request to make it more generic.** 
 
 Lets dive into our tutorial.
 
