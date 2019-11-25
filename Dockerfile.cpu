@@ -1,17 +1,31 @@
 # Import any publicly available os with python 3.6
 # We can import any os image as per our preference.
-FROM phenompeople/centos-python:3.6.3
+FROM python:3.6-buster
+
+MAINTAINER Pranay Chandekar "pranayc6@gmail.com"
+
+LABEL project="keras-sagemaker-train"
+
+# Do not change this argument
+ARG APP_HOME=/opt/program
 
 # Setup the environment path
-ENV PATH="/opt/program:${PATH}"
+ENV PATH="${APP_HOME}:${PATH}"
+
+# Upgrade pip and setuptools
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade setuptools
 
 # Install all the packages required by the project
 # This step will download all the packages mentioned in requirements.txt and thus can take some time.
 # To avoid downloading every time you can host your own os image with the required packages on docker hub.
 # The os image which is downloaded as a part of build is cached in the system.
 ADD requirements-cpu.txt /
+
 RUN pip3 install -r requirements-cpu.txt
 
 # Set up the program in the image
-COPY src /opt/program
-WORKDIR /opt/program
+COPY src ${APP_HOME}
+
+# Define the working directory
+WORKDIR ${APP_HOME}
