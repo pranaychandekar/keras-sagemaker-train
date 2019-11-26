@@ -185,7 +185,7 @@ Let us begin.
   <img src="/images/kst-14.png" alt="SageMaker notebook change kernel">    
 </p>    
     
-3. Please now follow the instructions in the jupyter-notebook for the remaining portion of this part and then get back here for the next part. See you soon.    
+3. Please now follow the instructions in the jupyter-notebook for the remaining portion and then get back here for the next part. See you soon.    
 <p align="center">    
   <img src="/images/kst-15.png" alt="Waiting image">    
 </p>    
